@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器全面检测器</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4">
+    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        <!-- 检测结果区域 -->
+        <div class="p-6 md:p-8 space-y-8" id="rc">
+            <!-- 浏览器信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    浏览器信息
+                </h2>
+                <div class="gr c1 md-c2 lg-c3">
+                    <div class="it"><span class="lb">浏览器名称：</span><strong class="vl" id="bn"></strong></div>
+                    <div class="it"><span class="lb">浏览器版本：</span><strong class="vl" id="bv"></strong></div>
+                    <div class="it"><span class="lb">浏览器内核：</span><strong class="vl" id="be"></strong></div>
+                    <div class="it"><span class="lb">是否为WebView：</span><strong class="vl" id="iwv"></strong></div>
+                    <div class="it"><span class="lb">是否为爬虫：</span><strong class="vl" id="ir"></strong></div>
+                    <div class="it"><span class="lb">Cookie是否启用：</span><strong class="vl" id="ce"></strong></div>
+                </div>
+            </div>
+
+            <!-- 系统信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    系统信息
+                </h2>
+                <div class="gr c1 md-c2 lg-c3">
+                    <div class="it"><span class="lb">系统名称：</span><strong class="vl" id="sn"></strong></div>
+                    <div class="it"><span class="lb">系统版本：</span><strong class="vl" id="sv"></strong></div>
+                    <div class="it"><span class="lb">平台类型：</span><strong class="vl" id="sp"></strong></div>
+                    <div class="it"><span class="lb">CPU架构：</span><strong class="vl" id="sa"></strong></div>
+                    <div class="it"><span class="lb">系统位数：</span><strong class="vl" id="sb"></strong></div>
+                </div>
+            </div>
+
+            <!-- 设备信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    设备信息
+                </h2>
+                <div class="gr c1 md-c2 lg-c3">
+                    <div class="it"><span class="lb">设备类型：</span><strong class="vl" id="dt"></strong></div>
+                    <div class="it"><span class="lb">设备像素比：</span><strong class="vl" id="dpr"></strong></div>
+                    <div class="it"><span class="lb">设备内存：</span><strong class="vl" id="dm"></strong></div>
+                    <div class="it"><span class="lb">是否支持触摸：</span><strong class="vl" id="itc"></strong></div>
+                </div>
+            </div>
+
+            <!-- 屏幕信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    屏幕信息
+                </h2>
+                <div class="gr c1 md-c2 lg-c4">
+                    <div class="it"><span class="lb">屏幕宽度：</span><strong class="vl" id="sw"></strong></div>
+                    <div class="it"><span class="lb">屏幕高度：</span><strong class="vl" id="sh"></strong></div>
+                    <div class="it"><span class="lb">可视区宽度：</span><strong class="vl" id="cw"></strong></div>
+                    <div class="it"><span class="lb">可视区高度：</span><strong class="vl" id="ch"></strong></div>
+                    <div class="it"><span class="lb">屏幕色彩深度：</span><strong class="vl" id="scd"></strong></div>
+                    <div class="it"><span class="lb">屏幕像素深度：</span><strong class="vl" id="spd"></strong></div>
+                    <div class="it"><span class="lb">屏幕方向：</span><strong class="vl" id="so"></strong></div>
+                </div>
+            </div>
+
+            <!-- GPU信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    GPU信息
+                </h2>
+                <div class="gr c1 md-c2">
+                    <div class="it"><span class="lb">GPU名称：</span><strong class="vl" id="gn"></strong></div>
+                    <div class="it"><span class="lb">GPU型号：</span><strong class="vl" id="gm"></strong></div>
+                </div>
+            </div>
+
+            <!-- 网络信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                    </svg>
+                    网络信息
+                </h2>
+                <div class="gr c1 md-c3">
+                    <div class="it"><span class="lb">网络类型：</span><strong class="vl" id="nt"></strong></div>
+                    <div class="it"><span class="lb">是否在线：</span><strong class="vl" id="io"></strong></div>
+                    <div class="it">
+                        <span class="lb">设备IP地址：</span>
+                        <strong class="vl iw" id="di"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 电池信息 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path>
+                    </svg>
+                    电池信息
+                </h2>
+                <div class="gr c1 md-c2">
+                    <div class="it"><span class="lb">是否充电：</span><strong class="vl" id="icg"></strong></div>
+                    <div class="it"><span class="lb">电池电量：</span><strong class="vl" id="bl"></strong></div>
+                </div>
+            </div>
+
+            <!-- 语言与时区 -->
+            <div class="bdr">
+                <h2 class="hd">
+                    <svg class="ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                    语言与时区
+                </h2>
+                <div class="gr c1 md-c2">
+                    <div class="it"><span class="lb">浏览器语言：</span><strong class="vl" id="blg"></strong></div>
+                    <div class="it"><span class="lb">系统时区：</span><strong class="vl" id="st"></strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入浏览器检测库 -->
+    <script src="./js/browser.min.js"></script>
+    <script>
+        // 处理URL参数
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        // 返回纯文本响应
+        function returnTextResponse(content) {
+            // 设置内容类型为纯文本
+            document.contentType = 'text/plain; charset=utf-8';
+            
+            // 清空文档并写入内容
+            document.write(content);
+            
+            // 阻止后续脚本执行
+            throw new Error("API响应已完成");
+        }
+        
+        // 中文参数映射到英文参数
+        const chineseToEnglishMap = {
+            '浏览器名称': 'bn',
+            '浏览器版本': 'bv',
+            '浏览器内核': 'be',
+            '是否为WebView': 'iwv',
+            '是否为爬虫': 'ir',
+            'Cookie是否启用': 'ce',
+            '系统名称': 'sn',
+            '系统版本': 'sv',
+            '平台类型': 'sp',
+            'CPU架构': 'sa',
+            '系统位数': 'sb',
+            '设备类型': 'dt',
+            '设备像素比': 'dpr',
+            '设备内存': 'dm',
+            '是否支持触摸': 'itc',
+            '屏幕宽度': 'sw',
+            '屏幕高度': 'sh',
+            '可视区宽度': 'cw',
+            '可视区高度': 'ch',
+            '屏幕色彩深度': 'scd',
+            '屏幕像素深度': 'spd',
+            '屏幕方向': 'so',
+            'GPU名称': 'gn',
+            'GPU型号': 'gm',
+            '网络类型': 'nt',
+            '是否在线': 'io',
+            '设备IP地址': 'di',
+            '是否充电': 'icg',
+            '电池电量': 'bl',
+            '浏览器语言': 'blg',
+            '系统时区': 'st'
+        };
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const allInfo = await browser.getInfo([
+                    'browser', 'system', 'device', 'gpu', 
+                    'network', 'battery', 'screen', 'language', 'timezone'
+                ]);
+
+                // 检查是否有API请求 - 修改为使用's'参数
+                const apiParam = getUrlParameter('s');
+                const hash = window.location.hash;
+
+                if (apiParam) {
+                    let responseText = '未知参数';
+                    
+                    // 检查是否是中文参数
+                    let paramName = apiParam;
+                    if (chineseToEnglishMap[apiParam]) {
+                        paramName = chineseToEnglishMap[apiParam];
+                    }
+                    
+                    // 根据参数返回对应的检测结果
+                    switch(paramName) {
+                        case 'bn':
+                            responseText = allInfo.browser || '未知';
+                            break;
+                        case 'bv':
+                            responseText = allInfo.browserVersion || '未知';
+                            break;
+                        case 'be':
+                            responseText = allInfo.engine || '未知';
+                            break;
+                        case 'iwv':
+                            responseText = allInfo.isWebview ? '是' : '否';
+                            break;
+                        case 'ir':
+                            responseText = allInfo.isRobot ? '是' : '否';
+                            break;
+                        case 'ce':
+                            responseText = allInfo.cookieEnabled ? '是' : '否';
+                            break;
+                        case 'sn':
+                            responseText = allInfo.system || '未知';
+                            break;
+                        case 'sv':
+                            responseText = allInfo.systemVersion || '未知';
+                            break;
+                        case 'sp':
+                            responseText = allInfo.platform || '未知';
+                            break;
+                        case 'sa':
+                            responseText = allInfo.architecture || '未知';
+                            break;
+                        case 'sb':
+                            responseText = allInfo.bitness ? `${allInfo.bitness}位` : '未知';
+                            break;
+                        case 'dt':
+                            responseText = allInfo.device || '未知';
+                            break;
+                        case 'dpr':
+                            responseText = allInfo.devicePixelRatio || '未知';
+                            break;
+                        case 'dm':
+                            responseText = allInfo.deviceMemory ? `${allInfo.deviceMemory}GB` : '未知';
+                            break;
+                        case 'itc':
+                            responseText = allInfo.isTouch ? '是' : '否';
+                            break;
+                        case 'sw':
+                            responseText = allInfo.screenWidth ? `${allInfo.screenWidth}px` : '未知';
+                            break;
+                        case 'sh':
+                            responseText = allInfo.screenHeight ? `${allInfo.screenHeight}px` : '未知';
+                            break;
+                        case 'cw':
+                            responseText = allInfo.clientWidth ? `${allInfo.clientWidth}px` : '未知';
+                            break;
+                        case 'ch':
+                            responseText = allInfo.clientHeight ? `${allInfo.clientHeight}px` : '未知';
+                            break;
+                        case 'scd':
+                            responseText = allInfo.screenColorDepth ? `${allInfo.screenColorDepth}位` : '未知';
+                            break;
+                        case 'spd':
+                            responseText = allInfo.screenPixelDepth ? `${allInfo.screenPixelDepth}位` : '未知';
+                            break;
+                        case 'so':
+                            responseText = allInfo.screenOrientation || '未知';
+                            break;
+                        case 'gn':
+                            responseText = allInfo.gpu || '未知';
+                            break;
+                        case 'gm':
+                            responseText = allInfo.gpuModel || '未知';
+                            break;
+                        case 'nt':
+                            responseText = allInfo.network || '未知';
+                            break;
+                        case 'io':
+                            responseText = allInfo.isOnline ? '是' : '否';
+                            break;
+                        case 'di':
+                            responseText = allInfo.ip || '无法获取';
+                            break;
+                        case 'icg':
+                            responseText = allInfo.isCharging ? '是' : '否';
+                            break;
+                        case 'bl':
+                            responseText = allInfo.battery >= 0 ? `${(allInfo.battery * 100).toFixed(0)}%` : '无法获取';
+                            break;
+                        case 'blg':
+                            responseText = allInfo.language || '未知';
+                            break;
+                        case 'st':
+                            responseText = allInfo.timezone || '未知';
+                            break;
+                        default:
+                            responseText = '未知参数，请检查参数名称';
+                    }
+                    
+                    // 新增：如果URL中有#t，则跳转而不是返回文本
+                    if (hash === '#t') {
+                        // 构造跳转URL
+                        const redirectUrl = `https://text.20110914.xyz/index.php?text=${encodeURIComponent(responseText)}`;
+                        window.location.href = redirectUrl;
+                        return;
+                    } else {
+                        // 返回纯文本响应
+                        returnTextResponse(responseText);
+                    }
+                }
+
+                // 正常显示页面内容
+                document.getElementById('bn').textContent = allInfo.browser || '未知';
+                document.getElementById('bv').textContent = allInfo.browserVersion || '未知';
+                document.getElementById('be').textContent = allInfo.engine || '未知';
+                document.getElementById('iwv').textContent = allInfo.isWebview ? '是' : '否';
+                document.getElementById('ir').textContent = allInfo.isRobot ? '是' : '否';
+                document.getElementById('ce').textContent = allInfo.cookieEnabled ? '是' : '否';
+
+                document.getElementById('sn').textContent = allInfo.system || '未知';
+                document.getElementById('sv').textContent = allInfo.systemVersion || '未知';
+                document.getElementById('sp').textContent = allInfo.platform || '未知';
+                document.getElementById('sa').textContent = allInfo.architecture || '未知';
+                document.getElementById('sb').textContent = allInfo.bitness ? `${allInfo.bitness}位` : '未知';
+
+                document.getElementById('dt').textContent = allInfo.device || '未知';
+                document.getElementById('dpr').textContent = allInfo.devicePixelRatio || '未知';
+                document.getElementById('dm').textContent = allInfo.deviceMemory ? `${allInfo.deviceMemory}GB` : '未知';
+                document.getElementById('itc').textContent = allInfo.isTouch ? '是' : '否';
+
+                document.getElementById('sw').textContent = allInfo.screenWidth ? `${allInfo.screenWidth}px` : '未知';
+                document.getElementById('sh').textContent = allInfo.screenHeight ? `${allInfo.screenHeight}px` : '未知';
+                document.getElementById('cw').textContent = allInfo.clientWidth ? `${allInfo.clientWidth}px` : '未知';
+                document.getElementById('ch').textContent = allInfo.clientHeight ? `${allInfo.clientHeight}px` : '未知';
+                document.getElementById('scd').textContent = allInfo.screenColorDepth ? `${allInfo.screenColorDepth}位` : '未知';
+                document.getElementById('spd').textContent = allInfo.screenPixelDepth ? `${allInfo.screenPixelDepth}位` : '未知';
+                document.getElementById('so').textContent = allInfo.screenOrientation || '未知';
+
+                document.getElementById('gn').textContent = allInfo.gpu || '未知';
+                document.getElementById('gm').textContent = allInfo.gpuModel || '未知';
+
+                document.getElementById('nt').textContent = allInfo.network || '未知';
+                document.getElementById('io').textContent = allInfo.isOnline ? '是' : '否';
+                document.getElementById('di').textContent = allInfo.ip || '无法获取';
+
+                document.getElementById('icg').textContent = allInfo.isCharging ? '是' : '否';
+                document.getElementById('bl').textContent = allInfo.battery >= 0 ? `${(allInfo.battery * 100).toFixed(0)}%` : '无法获取';
+
+                document.getElementById('blg').textContent = allInfo.language || '未知';
+                document.getElementById('st').textContent = allInfo.timezone || '未知';
+
+            } catch (error) {
+                // 如果是API响应错误，不显示错误信息
+                if (!getUrlParameter('s')) {
+                    alert(`检测失败：${error.message}`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
